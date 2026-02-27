@@ -3,11 +3,13 @@
 # Purpose:
 #--------------------------------------------------
 
-.PHONY: run test
+.PHONY: all run test
+
+all: run
 
 run:
-	@chez --script src/main.ss
+	@chez --libdirs src:. --script src/main.ss
 
 test:
-	@chez --script test/test.ss
+	@chez --libdirs src:. --script test/test.ss
 
