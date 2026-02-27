@@ -1,29 +1,32 @@
 
-; (library-directories '("src"))
+(import (chezscheme))
 
-; (import (chezscheme))
+(define (seed!)
+  (let* ([t (+ (real-time) (cpu-time))]
+         [n (inexact->exact (floor t))]
+         [s (modulo n 4294967296)])
+    (random-seed s)))
 
-;; シード値を現在時刻（ミリ秒）で初期化
-; (random-seed (real-time))
-(random-seed (+ (real-time) (cpu-time)))
+(seed!)
+
 ;; 1〜6のサイコロ
 (define (roll-dice)
   (+ 1 (random 6)))
 
-
 (define (roll n)
-  (cond ((= n 0) #t)
-        (else
-          (display (roll-dice))
-          (newline)
-          (roll (- n 1)))))
+  (unless (= n 0)
+    (display (roll-dice))
+    (newline)
+    (roll (- n 1))))
 
 (define (main)
   (let ((args (command-line)))
     (if (null? (cdr args)) 
       (roll 1)
-      (let ([count (string->number (cadr args))])
-        (roll count)))))
+      (let ((count (string->number (cadr args))))
+        (if (and count (integer? count) (>= count 1))
+          (roll count)
+          (roll 1))))))
 
 (main)
 

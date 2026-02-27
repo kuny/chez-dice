@@ -1,8 +1,3 @@
 #!/usr/bin/env bash
 
-
-if [ $# -eq 1 ]; then
-    chez --script src/main.ss $1
-else
-    chez --script src/main.ss 1
-fi
+chez --script src/main.ss "$@"
