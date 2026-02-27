@@ -16,9 +16,26 @@ Chez Scheme で書いた超シンプルなサイコロ（1〜6）CLIです。
 
 ## Usage
 
-### 1) `roll` を使う（おすすめ）
+### 1) `roll` を使う
 
 ```sh
 # repo 直下で
 ./roll        # 1回振る
 ./roll 10     # 10回振る
+```
+
+### 2) 直接 chez --script で実行
+
+```sh
+# repo 直下で
+chez --script src/main.ss 
+chez --script src/main.ss 10
+```
+
+### 3) Makefile から実行
+
+```sh
+make run
+```
+
+&copy; 2026 Atelier Kame
